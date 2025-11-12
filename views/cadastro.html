@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia - Cadastro</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body class="cadastro-page">
+
+    <main class="cadastro-container">
+        <form action="home.html" method="GET">
+            
+            <h1>Crie sua Conta</h1>
+            
+            <div class="input-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required>
+            </div>
+
+            <div class="input-group">
+                <label for="confirma-senha">Confirmar Senha</label>
+                <input type="password" id="confirma-senha" name="confirma-senha" placeholder="Repita a senha" required>
+            </div>
+            
+            <button type="submit" class="btn-login">Cadastrar</button>
+            
+            <div class="cadastro-footer">
+                <p>Já tem uma conta?</p>
+                <a href="../index.html">Faça o login</a>
+            </div>
+            
+        </form>
+    </main>
+
+</body>
+</html>
