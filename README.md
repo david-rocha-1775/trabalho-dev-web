@@ -1,5 +1,5 @@
 # trabalho-dev-web
-trabalho desenvolvido durante o curso tecnico. Gerenciamento e agendamento de uma barbearia.
+trabalho desenvolvido durante o curso técnico. Gerenciamento e agendamento de uma barbearia.
 
 # 🏛️ Resumo do Sistema: Barbearia Estático (README.md)
 
@@ -19,7 +19,7 @@ Este documento serve como um guia para futuras manutenções, garantindo que a e
 
 A identidade do site foi construída sobre três pilares: **Profissionalismo, Energia e Legibilidade.**
 
-* **Profissionalismo (Fundos Escuros):** A cor `#333` (cinza-escuro/quase preto) é usada no `header` e `footer` para "ancorar" o site, dando um visual sofisticado e unificado em todas as páginhas.
+* **Profissionalismo (Fundos Escuros):** A cor `#333` (cinza-escuro/quase preto) é usada no `header` e `footer` para "ancorar" o site, dando um visual sofisticado e unificado em todas as páginas.
 * **Energia (Acento Vermelho):** A cor `#E63946` (vermelho) é o ponto focal. Ela **NÃO** deve ser usada em excesso. Sua função é guiar o usuário para ações importantes (botões, links ativos, destaques).
 * **Legibilidade (Fundos Claros):** O conteúdo principal (`.main-content`) usa fundos `#f4f4f4` (body) e `#ffffff` (cards, formulários) para garantir que o texto seja fácil de ler e o visual seja limpo.
 * **Fluxo Visual Distinto:** Há uma separação clara entre o fluxo de "Autenticação" e o de "Conteúdo".
