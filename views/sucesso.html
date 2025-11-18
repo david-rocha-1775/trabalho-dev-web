@@ -11,8 +11,8 @@
 
     <header>
         <div class="logo-container">
-                <a href="home.html"><img src="../public/images/logo.png" alt="Logo Barbearia" class="logo-img"></a>
-            </div>
+            <a href="home.html"><img src="../public/images/logo.png" alt="Logo Barbearia" class="logo-img"></a>
+        </div>
         <nav>
             <ul>
                 <li><a href="servicos.html">Serviços</a></li>
@@ -26,8 +26,40 @@
     
     <main class="main-content">
         <section class="intro-text" style="text-align: center;">
-            <h2>Agendamento Solicitado!</h2>
-            <p style="margin-bottom: 2rem;">Sua solicitação foi enviada com sucesso. Em breve, entraremos em contato para confirmar seu horário.</p>
+            <h2>Solicitação Enviada!</h2>
+            <p>Confira abaixo os dados do seu agendamento:</p>
+            
+            <div class="resumo-container">
+                <table class="resumo-tabela">
+                    <tr>
+                        <th>Nome:</th>
+                        <td id="res-nome">Carregando...</td>
+                    </tr>
+                    <tr>
+                        <th>Telefone:</th>
+                        <td id="res-telefone">-</td>
+                    </tr>
+                    <tr>
+                        <th>Serviço:</th>
+                        <td id="res-servico">-</td>
+                    </tr>
+                    <tr>
+                        <th>Data:</th>
+                        <td id="res-data">-</td>
+                    </tr>
+                    <tr>
+                        <th>Hora:</th>
+                        <td id="res-hora">-</td>
+                    </tr>
+                    <tr>
+                        <th>Observações:</th>
+                        <td id="res-obs">-</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p style="margin-top: 2rem; margin-bottom: 2rem;">Em breve, entraremos em contato pelo telefone informado para confirmar.</p>
+            
             <a href="home.html" class="btn-cta">Voltar para o início</a>
         </section>
     </main>
@@ -37,6 +69,42 @@
         <p>&copy; 2025 Barbearia Etc</p>
         <p>Siga-nos nas redes sociais!</p>
     </footer>
+
+    <script>
+        // Pega os parâmetros da URL (ex: ?nome=Joao&data=2025-01-01...)
+        const params = new URLSearchParams(window.location.search);
+
+        // Dicionário para mostrar o nome do serviço em vez do código
+        const servicosMap = {
+            'corte': 'Corte de Cabelo (R$ 40,00)',
+            'barba': 'Barba Completa (R$ 35,00)',
+            'combo': 'Combo (Cabelo + Barba) (R$ 70,00)',
+            'pezinho': 'Pezinho (R$ 15,00)'
+        };
+
+        // Função simples para preencher o texto pelo ID
+        // Se não tiver dado na URL, coloca um traço "-"
+        document.getElementById('res-nome').innerText = params.get('nome') || '-';
+        document.getElementById('res-telefone').innerText = params.get('telefone') || '-';
+        
+        // Para o serviço, tentamos achar o nome bonito no mapa acima
+        const codServico = params.get('servico');
+        document.getElementById('res-servico').innerText = servicosMap[codServico] || codServico || '-';
+
+        // Para a data, vamos tentar formatar para dia/mês/ano se possível
+        const dataRaw = params.get('data');
+        if(dataRaw) {
+            const dataObj = new Date(dataRaw);
+            // Ajuste de fuso horário simples (para não voltar um dia)
+            dataObj.setMinutes(dataObj.getMinutes() + dataObj.getTimezoneOffset());
+            document.getElementById('res-data').innerText = dataObj.toLocaleDateString('pt-BR');
+        } else {
+            document.getElementById('res-data').innerText = '-';
+        }
+
+        document.getElementById('res-hora').innerText = params.get('hora') || '-';
+        document.getElementById('res-obs').innerText = params.get('obs') || '-';
+    </script>
     
 </body>
 </html>

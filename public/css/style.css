@@ -468,3 +468,49 @@ footer p {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* ========================================= */
+/* ESTILOS: TABELA DE SUCESSO / RESUMO       */
+/* ========================================= */
+
+.resumo-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.resumo-tabela {
+    width: 100%;
+    max-width: 500px; /* Limita a largura para não ficar gigante */
+    border-collapse: collapse; /* Junta as bordas */
+    text-align: left;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden; /* Respeita o border-radius */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+.resumo-tabela th, 
+.resumo-tabela td {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.resumo-tabela th {
+    background-color: #E63946; /* Vermelho da marca no cabeçalho lateral */
+    color: white;
+    width: 35%; /* Tamanho da coluna de rótulos */
+    font-weight: bold;
+}
+
+.resumo-tabela td {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Remove a borda da última linha para ficar mais limpo */
+.resumo-tabela tr:last-child th,
+.resumo-tabela tr:last-child td {
+    border-bottom: none;
+}

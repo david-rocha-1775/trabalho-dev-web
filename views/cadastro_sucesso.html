@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Realizado!</title>
+    <link rel="icon" href="/public/images/favicon.ico">
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="home.html"><img src="../public/images/logo.png" alt="Logo Barbearia" class="logo-img"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="agendamento.html">Agendamento</a></li>
+                <li><a href="galeria.html">Galeria</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="../index.html">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <section class="intro-text" style="text-align: center;">
+            <h2>Cadastro Realizado!</h2>
+            <p>Seja bem-vindo(a)! Sua conta foi criada com sucesso.</p>
+            
+            <div class="resumo-container">
+                <table class="resumo-tabela">
+                    <tr>
+                        <th>Nome:</th>
+                        <td id="cad-nome">Carregando...</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td id="cad-email">-</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p style="margin-top: 2rem; margin-bottom: 2rem;">Agora você já pode aproveitar todos os nossos serviços online.</p>
+            
+            <a href="home.html" class="btn-cta">Acessar o Sistema</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Barbearia Etc</p>
+        <p>Siga-nos nas redes sociais!</p>
+    </footer>
+
+    <script>
+        // Pega os parâmetros da URL
+        const params = new URLSearchParams(window.location.search);
+
+        // Preenche a tabela
+        document.getElementById('cad-nome').innerText = params.get('nome') || '-';
+        document.getElementById('cad-email').innerText = params.get('email') || '-';
+    </script>
+    
+</body>
+</html>
