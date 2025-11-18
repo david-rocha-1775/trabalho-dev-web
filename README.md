@@ -1,58 +1,98 @@
-# trabalho-dev-web
-trabalho desenvolvido durante o curso técnico. Gerenciamento e agendamento de uma barbearia.
+# Guia Técnico e Explicação do Código: Sistema "Barbearia Etc"
 
-# 🏛️ Resumo do Sistema: Barbearia Estático (README.md)
+Este documento detalha a arquitetura e a lógica de programação por trás do sistema web da Barbearia Etc. O foco é explicar como HTML, CSS e JavaScript interagem para criar as funcionalidades do site.
 
-Este documento serve como um guia para futuras manutenções, garantindo que a essência visual e estrutural do site seja preservada.
+## 1. Arquitetura e Estilização Global
 
-## 1. Visão Geral do Projeto
+O sistema segue o padrão **MVC (Model-View-Controller) adaptado** para um contexto estático.
+* **Views:** Pastas HTML (`/views`) contendo a estrutura.
+* **Public:** Pasta de recursos (`/public`) contendo CSS e Imagens.
 
-* **Objetivo:** Website estático (HTML/CSS) para uma barbearia, simulando um sistema de agendamento.
-* **Tecnologia:** HTML5 e CSS3.
-* **Estrutura:** O projeto segue uma estrutura **MVC adaptada** (a pedido acadêmico) para organizar os arquivos, mesmo sendo estático.
-    * `index.html`: É a tela de **Login** (ponto de entrada).
-    * `views/`: Contém todas as **páginas** de conteúdo (`home.html`, `servicos.html`, etc.).
-    * `public/`: Contém os **assets** (um único `style.css`, imagens, etc.).
-    * `models/` e `controllers/`: Pastas vazias, prontas para uma futura expansão *back-end*.
+### O Arquivo `style.css` (O Motor Visual)
+Todo o design é centralizado em um único arquivo para consistência.
+* **Responsividade sem Media Queries:** Na classe `.service-list` e `.gallery-grid`, utilizamos uma técnica avançada de CSS Grid:
+    ```css
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    ```
+    *Explicação:* Isso diz ao navegador: "Crie tantas colunas quanto couberem (`auto-fit`). Cada coluna deve ter no mínimo `280px`. Se sobrar espaço, divida-o igualmente (`1fr`)." Isso faz o layout se adaptar a celulares e PCs automaticamente.
+* **Técnica "Visual Hidden":** Para atender à exigência de usar apenas a logo no cabeçalho sem prejudicar a semântica (SEO) da página, criamos a classe `.visual-hidden`:
+    ```css
+    .visual-hidden { display: none; }
+    ```
+    Isso mantém a tag `<h1>` no código (importante para a estrutura), mas a esconde visualmente.
 
-## 2. Identidade Visual (A Essência)
+---
 
-A identidade do site foi construída sobre três pilares: **Profissionalismo, Energia e Legibilidade.**
+## 2. Fluxo de Login e Cadastro
 
-* **Profissionalismo (Fundos Escuros):** A cor `#333` (cinza-escuro/quase preto) é usada no `header` e `footer` para "ancorar" o site, dando um visual sofisticado e unificado em todas as páginas.
-* **Energia (Acento Vermelho):** A cor `#E63946` (vermelho) é o ponto focal. Ela **NÃO** deve ser usada em excesso. Sua função é guiar o usuário para ações importantes (botões, links ativos, destaques).
-* **Legibilidade (Fundos Claros):** O conteúdo principal (`.main-content`) usa fundos `#f4f4f4` (body) e `#ffffff` (cards, formulários) para garantir que o texto seja fácil de ler e o visual seja limpo.
-* **Fluxo Visual Distinto:** Há uma separação clara entre o fluxo de "Autenticação" e o de "Conteúdo".
-    * **Autenticação (`index.html`, `views/cadastro.html`):** Usam um fundo escuro (`#333`) que preenche a tela inteira.
-    * **Conteúdo (`views/home.html`, etc.):** Usam o layout padrão (Header escuro, Conteúdo claro, Footer escuro).
+### `index.html` (Login)
+A "mágica" do login simulado acontece no formulário HTML.
+* **Código Chave:**
+    ```html
+    <form action="views/home.html" method="GET">
+    ```
+    *Explicação:* O atributo `action` define para onde o navegador deve ir quando o formulário for enviado. Ao apontar para `views/home.html`, criamos a ilusão de um login bem-sucedido sem precisar de um servidor real.
 
-## 3. Paleta de Cores (Guia Rápido)
+### `views/cadastro.html` e `cadastro_sucesso.html`
+Aqui introduzimos a **passagem de dados via URL**.
+1.  **Envio:** O formulário de cadastro usa `method="GET"`. Isso faz com que os dados digitados (ex: nome="Joao") apareçam na URL da próxima página: `...html?nome=Joao&email=...`.
+2.  **Recepção (JavaScript):** Na página de sucesso, usamos JavaScript para ler essa URL:
+    ```javascript
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('cad-nome').innerText = params.get('nome');
+    ```
+    *Explicação:* `URLSearchParams` é uma ferramenta nativa do navegador que "desempacota" a URL. O script pega o valor do campo 'nome' e o injeta na tag HTML com id `cad-nome`, personalizando a mensagem.
 
-| Cor | Hexcode | Papel Principal | Onde é usado |
-| :--- | :--- | :--- | :--- |
-| **Vermelho (Acento)** | `#E63946` | Ação e Destaque | Botões, Links, `a.active`, Preços |
-| **Vermelho (Hover)** | `#b82834` | Interação de Botão | `.btn-login:hover`, `.btn-cta:hover` |
-| **Cinza Escuro (Base)** | `#333` | Estrutura e Foco | `header`, `footer`, fundos de Login/Cadastro |
-| **Cinza Médio** | `#555` | Descrições | Subtítulos (`.main-content h2 + p`) |
-| **Branco (Conteúdo)** | `#ffffff` | Fundo de Conteúdo | Cards (`.service-item`), Formulários, `.intro-text` |
-| **Cinza Claro (Fundo)** | `#f4f4f4` | Fundo do Site | `body` (páginas de conteúdo) |
+---
 
-## 4. Guia de Funcionalidades (Páginas)
+## 3. Funcionalidades Principais
 
-| Página (Arquivo) | Propósito | Classes/Componentes Chave |
-| :--- | :--- | :--- |
-| `index.html` | **Login:** Ponto de entrada. | `.login-page`, `.login-container` |
-| `views/cadastro.html` | **Cadastro:** Página com estilo espelhado no Login. | `.cadastro-page`, `.cadastro-container` |
-| `views/home.html` | **Home:** Introdução ao site após o "login". | `.welcome-banner`, `.btn-cta` |
-| `views/servicos.html` | **Serviços:** Lista de serviços em formato de *grid*. | `.service-list`, `.service-item` |
-| `views/agendamento.html`| **Agendamento:** Formulário (simulado) para marcar horário. | `.agendamento-form`, (reúsa `.input-group`) |
-| `views/galeria.html` | **Galeria:** *Grid* responsivo de imagens. | `.gallery-grid`, `.gallery-item` |
-| `views/contato.html` | **Contato:** Layout de 2 colunas para Info + Mapa. | `.contact-container`, `.contact-details` |
+### `views/agendamento.html` (Formulários Avançados)
+Esta página demonstra o uso correto dos tipos de input do HTML5 para melhorar a experiência em dispositivos móveis.
+* **Inputs Específicos:**
+    * `<input type="date">`: Abre o calendário nativo do celular.
+    * `<input type="time">`: Abre o seletor de hora.
+    * `<input type="tel">`: Abre o teclado numérico no celular.
+* **Select com Valores:**
+    ```html
+    <option value="corte">Corte de Cabelo (R$ 40,00)</option>
+    ```
+    Note que o `value` ("corte") é um código simples, diferente do texto que o usuário vê. Isso facilita o processamento dos dados depois.
 
-## 5. Componentes Reutilizáveis (CSS)
+### `views/sucesso.html` (Lógica de Dados)
+Esta página contém a lógica mais complexa do sistema. Ela recebe os dados "crus" do agendamento e os formata.
+* **Mapeamento de Dados (Dicionário):**
+    Como o formulário envia apenas códigos como "corte" ou "pezinho", usamos um objeto JavaScript para traduzir isso:
+    ```javascript
+    const servicosMap = {
+        'corte': 'Corte de Cabelo (R$ 40,00)',
+        'pezinho': 'Pezinho (R$ 15,00)',
+        // ...
+    };
+    ```
+* **Tratamento de Datas:**
+    Datas vindas de formulários podem ter problemas de fuso horário. O script inclui uma correção técnica:
+    ```javascript
+    dataObj.setMinutes(dataObj.getMinutes() + dataObj.getTimezoneOffset());
+    ```
+    Isso garante que o dia exibido na confirmação seja exatamente o dia que o usuário selecionou, sem voltar um dia devido ao fuso horário UTC.
 
-Para manter a consistência, sempre que possível, utilize estas classes globais:
+### `views/galeria.html` e `views/detalhe.html` (Sistema Dinâmico)
+Para evitar criar 8 arquivos HTML (um para cada foto), criamos um sistema de **Template Único**.
+1.  **O Link Inteligente (Galeria):**
+    ```html
+    <a href="detalhe.html?id=1">...</a>
+    ```
+    Cada foto envia um número identificador (`id`) diferente.
+2.  **O "Banco de Dados" Local (Detalhe):**
+    Dentro do JavaScript da página de detalhes, existe um objeto `const portfolio` que guarda as informações de todos os cortes.
+3.  **A Renderização:**
+    O script lê o ID da URL (`params.get('id')`), busca as informações correspondentes no objeto `portfolio` e atualiza a imagem (`src`) e os textos (`innerText`) da página em tempo real.
+    *Benefício:* Isso torna o site extremamente leve e fácil de manter. Para mudar a descrição de um corte, basta editar o script, sem mexer no HTML.
 
-* `.btn-login`: O botão de ação padrão (vermelho).
-* `.input-group`: O *wrapper* padrão para `label` e `input`/`select`/`textarea`.
-* `.main-content`: O *wrapper* principal de todo o conteúdo das páginas (define o `padding` padrão).
+---
+
+## 4. Estrutura Semântica
+
+* **Header/Nav:** O uso da lista não ordenada (`<ul>`) dentro da tag `<nav>` é o padrão semântico correto para menus, garantindo acessibilidade.
+* **Links Ativos:** A classe `.active` é aplicada manualmente no HTML de cada página para dar feedback visual ao usuário de onde ele está.
