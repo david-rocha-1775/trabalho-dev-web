@@ -41,10 +41,6 @@ header {
     height: 80px; /* Ajuste a altura do seu logo */
 }
 
-header h1 {
-    font-size: 1.5rem;
-}
-
 header nav ul {
     list-style: none;
     display: flex;
@@ -513,4 +509,15 @@ footer p {
 .resumo-tabela tr:last-child th,
 .resumo-tabela tr:last-child td {
     border-bottom: none;
+}
+
+/* ========================================= */
+/* UTILITÁRIOS (Classes de apoio)            */
+/* ========================================= */
+
+/* Esta classe esconde o elemento visualmente, 
+   mas ele continua existindo no código HTML.
+*/
+.visual-hidden {
+    display: none; 
 }
