@@ -25,6 +25,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
+    /* --- ALTERAÇÃO: Espaço para compensar o menu fixo --- */
+    padding-top: 120px; 
 }
 
 /* ========================================= */
@@ -111,6 +114,13 @@ header {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+    /* --- Menu Fixo --- */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .logo-container {
@@ -240,8 +250,6 @@ footer {
     display: inline-block;
     padding: 0.75rem 1.5rem;
 }
-
-/* Ajuste botão Home */
 
 /* Grids (Serviços e Galeria) */
 .service-list,
