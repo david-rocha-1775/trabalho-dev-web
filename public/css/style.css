@@ -1,30 +1,112 @@
 /* ========================================= */
-/* ESTILOS GLOBAIS (Para todas as páginas)   */
+/* 1. VARIÁVEIS E RESET                      */
 /* ========================================= */
+:root {
+    --cor-primaria: #E63946;
+    --cor-hover: #b82834;
+    --cor-texto: #333;
+    --cor-suave: #555;
+    --bg-escuro: #333;
+    --bg-claro: #f4f4f4;
+    --branco: #ffffff;
+    --sombra: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #f4f4f4; /* Um cinza claro de fundo para o site */
-    color: #333;
-    /* Estas 3 linhas garantem que o footer fique no fim da página */
+    background-color: var(--bg-claro);
+    color: var(--cor-texto);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 /* ========================================= */
-/* ESTILOS DE HEADER (Global)                */
+/* 2. COMPONENTES VISUAIS (Padrões do Site)  */
 /* ========================================= */
 
-header {
-    background-color: #333; /* Fundo escuro do header */
-    color: white;
+/* Padrão "Cartão": Fundo branco com sombra (Usado em todo o site) */
+.login-container,
+.cadastro-container,
+.intro-text,
+.service-item,
+.agendamento-form,
+.detail-container,
+.contact-container,
+.resumo-tabela {
+    background-color: var(--branco);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+}
+
+/* Botões (Login, CTA) */
+.btn-login,
+.btn-cta {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--cor-primaria);
+    color: var(--branco);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-login:hover,
+.btn-cta:hover {
+    background-color: var(--cor-hover);
+}
+
+/* Inputs de Formulário */
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--branco);
+}
+
+.input-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ========================================= */
+/* 3. ESTRUTURA (Header, Footer, Main)       */
+/* ========================================= */
+header,
+footer {
+    background-color: var(--bg-escuro);
+    color: var(--branco);
     padding: 1rem 2rem;
+}
+
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,289 +120,77 @@ header {
 }
 
 .logo-img {
-    height: 80px; /* Ajuste a altura do seu logo */
+    height: 80px;
 }
 
 header nav ul {
     list-style: none;
     display: flex;
-    gap: 1.5rem; /* Espaçamento entre os links */
+    gap: 1.5rem;
 }
 
 header nav a {
-    color: white;
+    color: var(--branco);
     text-decoration: none;
     font-weight: bold;
-    font-size: 1rem;
     padding-bottom: 5px;
-    border-bottom: 2px solid transparent; /* Efeito de borda sutil */
-    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
 }
 
-/* Efeito 'hover' usando seu vermelho */
-header nav a:hover {
-    color: #E63946;
-}
-
-/* Marca a página ativa */
+header nav a:hover,
 header nav a.active {
-    color: #E63946;
-    border-bottom: 2px solid #E63946;
+    color: var(--cor-primaria);
+    border-bottom-color: var(--cor-primaria);
 }
 
-
-/* ========================================= */
-/* ESTILOS DE CONTEÚDO (Global)              */
-/* ========================================= */
-
-/* Container principal de conteúdo */
 .main-content {
-    flex-grow: 1; /* Faz o conteúdo principal crescer */
-    padding: 2rem; /* Espaçamento interno em todas as páginas */
+    flex-grow: 1;
+    padding: 2rem;
 }
 
-/* Título de Página Padrão (h2) - AGORA CINZA */
+.main-content h1,
 .main-content h2 {
     font-size: 2rem;
-    color: #333; /* Corrigido para cinza padrão */
     margin-bottom: 0.5rem;
 }
 
-/* Subtítulo da página (p que vem DEPOIS de um h2) - CORRIGIDO */
-.main-content h2 + p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 2rem;
-}
-
-/* ========================================= */
-/* ESTILOS ESPECÍFICOS: HOME                 */
-/* ========================================= */
-.welcome-banner {
-    background-color: #555; /* Um fundo mais escuro para o banner */
-    color: white;
-    padding: 3rem;
-    text-align: center;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-}
-
-/* Título do Banner (H2) - AGORA BRANCO */
-.welcome-banner h2 {
-    font-size: 2rem;
+.main-content p {
     margin-bottom: 1rem;
-    color: #ffffff; /* CORRIGIDO: Exceção para o banner */
+    line-height: 1.5;
+    color: var(--cor-suave);
 }
 
-.welcome-banner p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Botão "Call to Action" */
-.btn-cta {
-    background-color: #E63946;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-cta:hover {
-    background-color: #b82834;
-}
-
-.intro-text {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-}
-
-
-/* ========================================= */
-/* ESTILOS ESPECÍFICOS: PÁGINA DE SERVIÇOS   */
-/* ========================================= */
-.service-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem; /* Espaço entre os cards */
-}
-
-/* Card individual de serviço */
-.service-item {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    border-left: 5px solid #E63946; /* Destaque com sua cor vermelha */
-    display: flex;
-    flex-direction: column;
-}
-
-.service-item h3 {
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-}
-
-.service-item p {
-    color: #666;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    flex-grow: 1; /* Faz a descrição ocupar o espaço */
-}
-
-.service-item .price {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #E63946; /* Preço com a cor de destaque */
-    align-self: flex-end; /* Alinha o preço à direita/fim */
-}
-
-/* ========================================= */
-/* ESTILOS ESPECÍFICOS: PÁGINA DE AGENDAMENTO */
-/* ========================================= */
-
-.agendamento-form {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    max-width: 600px; /* Limita a largura do formulário */
-    margin: 0 auto; /* Centraliza o formulário na página */
-}
-
-/* ========================================= */
-/* ESTILOS ESPECÍFICOS: PÁGINA DE GALERIA    */
-/* ========================================= */
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem; /* Espaço entre as imagens */
-}
-
-.gallery-item {
-    border-radius: 8px;
-    overflow: hidden; /* Garante que a imagem não vaze */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 250px; /* Altura fixa para todas as caixas */
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
-    transition: transform 0.3s ease;
-}
-
-.gallery-item img:hover {
-    transform: scale(1.05);
-}
-
-/* ========================================= */
-/* ESTILOS ESPECÍFICOS: PÁGINA DE CONTATO    */
-/* ========================================= */
-
-.contact-container {
-    display: flex;
-    flex-wrap: wrap; /* Permite quebrar em telas menores */
-    gap: 2rem;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.contact-details {
-    flex: 1; /* Ocupa metade do espaço */
-    min-width: 300px; /* Largura mínima antes de quebrar */
-}
-
-.contact-details h3 {
-    font-size: 1.75rem;
-    color: #E63946; /* Destaque vermelho */
-    border-bottom: 2px solid #f4f4f4;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.info-item {
-    margin-bottom: 1.5rem;
-}
-
-.info-item h4 {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 0.25rem;
-}
-
-.info-item p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.4;
-    margin-bottom: 0.25rem;
-}
-
-.map-container {
-    flex: 1; /* Ocupa a outra metade */
-    min-width: 300px; /* Largura mínima */
-    overflow: hidden; /* Garante que o iframe não vaze */
-    border-radius: 8px;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 400px;
-    border: none;
-}
-
-/* ========================================= */
-/* ESTILOS DE FOOTER (Global)                */
-/* ========================================= */
 footer {
-    background-color: #333; /* Fundo escuro (igual ao header) */
-    color: #aaa; /* Cor mais suave para o rodapé */
     text-align: center;
+    margin-top: auto;
     padding: 1.5rem;
-    margin-top: auto; /* Garante que ele fique no final */
-}
-
-footer p {
-    margin-bottom: 0.5rem;
+    color: #aaa;
 }
 
 /* ========================================= */
-/* ESTILOS: TELAS DE LOGIN E CADASTRO (UNIFICADO) */
+/* 4. PÁGINAS ESPECÍFICAS                    */
 /* ========================================= */
 
-/* Fundo escuro e centralização */
+/* Login & Cadastro (Centralizados e Escuros) */
 .login-page,
 .cadastro-page {
-    background-color: #333;
+    background-color: var(--bg-escuro);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 2rem 0; /* Padding para cadastro em telas pequenas */
+    padding: 2rem 0;
 }
 
-/* Ajuste para login-page ocupar 100% da altura */
 .login-page {
-    height: 100vh;
     padding: 0;
+    height: 100vh;
 }
 
-/* Container do formulário */
+/* Ajuste fino */
 .login-container,
 .cadastro-container {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
 }
@@ -328,72 +198,19 @@ footer p {
 .login-container h1,
 .cadastro-container h1 {
     text-align: center;
-    color: #333;
-    margin-bottom: 1.5rem;
+    color: var(--cor-texto);
 }
 
-/* Agrupamento de label e input */
-.input-group {
-    margin-bottom: 1rem;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-}
-
-/* Estilo unificado para todos os campos de formulário */
-.input-group input,
-.input-group select,
-.input-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
-    background-color: #fff;
-}
-
-.input-group textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-/* Botão (Login e Cadastro) */
-.btn-login {
-    width: 100%;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #E63946; /* COR VERMELHA PRINCIPAL */
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-login:hover {
-    background-color: #b82834; /* TOM DE VERMELHO MAIS ESCURO (hover) */
-}
-
-/* Rodapé (Login e Cadastro) */
 .login-footer,
 .cadastro-footer {
     text-align: center;
     margin-top: 1rem;
 }
 
-.login-footer p,
-.cadastro-footer p {
-    margin-bottom: 0.5rem;
-}
-
 .login-footer a,
-.cadastro-footer a {
-    color: #E63946;
+.cadastro-footer a,
+.back-link {
+    color: var(--cor-primaria);
     text-decoration: none;
     font-weight: bold;
 }
@@ -403,46 +220,95 @@ footer p {
     text-decoration: underline;
 }
 
-/* ========================================= */
-/* ESTILOS: PÁGINA DE DETALHES DA FOTO       */
-/* ========================================= */
+/* Home */
+.welcome-banner {
+    background-color: #555;
+    color: var(--branco);
+    padding: 3rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.welcome-banner h1,
+.welcome-banner h2 {
+    color: var(--branco);
+}
+
+.btn-cta {
+    width: auto;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+}
+
+/* Ajuste botão Home */
+
+/* Grids (Serviços e Galeria) */
+.service-list,
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Card de Serviço */
+.service-item {
+    border-left: 5px solid var(--cor-primaria);
+    display: flex;
+    flex-direction: column;
+}
+
+.service-item .price {
+    margin-top: auto;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    text-align: right;
+}
+
+/* Agendamento */
+.agendamento-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Galeria & Detalhes */
+.gallery-item {
+    height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
 
 .detail-container {
     max-width: 800px;
-    margin: 0 auto; /* Centraliza na tela */
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.back-link {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    color: #555;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.back-link:hover {
-    color: #E63946;
-    text-decoration: underline;
+    margin: 0 auto;
 }
 
 .detail-image-wrapper {
-    width: 100%;
-    height: 400px; /* Altura fixa para padronizar */
+    height: 400px;
     overflow: hidden;
     border-radius: 8px;
+    border: 1px solid #eee;
     margin-bottom: 2rem;
-    border: 2px solid #eee;
+    background: #000;
 }
 
 .detail-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Mostra a foto inteira sem cortar */
-    background-color: #000; /* Fundo preto para fotos que não preenchem tudo */
+    object-fit: contain;
 }
 
 .detail-info {
@@ -450,25 +316,44 @@ footer p {
 }
 
 .detail-info h2 {
-    color: #E63946; /* Vermelho da marca */
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    color: var(--cor-primaria);
 }
 
-.detail-info p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+/* Contato */
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
-/* ========================================= */
-/* ESTILOS: TABELA DE SUCESSO / RESUMO       */
-/* ========================================= */
+.contact-details,
+.map-container {
+    flex: 1;
+    min-width: 300px;
+}
 
+.contact-details h3 {
+    font-size: 1.75rem;
+    color: var(--cor-primaria);
+    border-bottom: 2px solid var(--bg-claro);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.map-container {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border: none;
+}
+
+/* Tabela de Resumo */
 .resumo-container {
     display: flex;
     justify-content: center;
@@ -477,47 +362,29 @@ footer p {
 
 .resumo-tabela {
     width: 100%;
-    max-width: 500px; /* Limita a largura para não ficar gigante */
-    border-collapse: collapse; /* Junta as bordas */
-    text-align: left;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    overflow: hidden; /* Respeita o border-radius */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    border: 1px solid #eee;
+    max-width: 500px;
+    border-collapse: collapse;
+    overflow: hidden;
 }
 
-.resumo-tabela th, 
+.resumo-tabela th {
+    background-color: var(--cor-primaria);
+    color: var(--branco);
+    width: 35%;
+    padding: 1rem;
+    text-align: left;
+}
+
 .resumo-tabela td {
     padding: 1rem;
     border-bottom: 1px solid #e0e0e0;
 }
 
-.resumo-tabela th {
-    background-color: #E63946; /* Vermelho da marca no cabeçalho lateral */
-    color: white;
-    width: 35%; /* Tamanho da coluna de rótulos */
-    font-weight: bold;
-}
-
-.resumo-tabela td {
-    color: #333;
-    font-weight: 500;
-}
-
-/* Remove a borda da última linha para ficar mais limpo */
-.resumo-tabela tr:last-child th,
 .resumo-tabela tr:last-child td {
     border-bottom: none;
 }
 
-/* ========================================= */
-/* UTILITÁRIOS (Classes de apoio)            */
-/* ========================================= */
-
-/* Esta classe esconde o elemento visualmente, 
-   mas ele continua existindo no código HTML.
-*/
+/* Utilitários */
 .visual-hidden {
-    display: none; 
+    display: none;
 }
